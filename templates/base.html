@@ -1,0 +1,98 @@
+<DOCTYPE html>
+{% import "bootstrap/wtf.html" as wtf %}
+<html>
+<head>
+    	<head>
+		<title>Ahmad</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+	</head>
+	<body class="landing">
+
+		<!-- Banner -->
+			<section id="banner">
+				<h1>AWS Developer LAB</h1>
+				<ul class="actions">
+				</ul>
+			</section>
+
+
+	</body>
+<style>
+table, td, th {
+  border: 1px solid black;
+}
+
+table {
+  width: 30%;
+  border-collapse: collapse;
+}
+</style>
+</head>
+<body>
+<h2>Current Store Inventory</h2>
+<table>
+    <tr>
+    <th>Product Id</th>
+    <th>Product Name</th>
+    <th>Product Qty</th>
+	<th>Store Location</th>
+  </tr>
+<tbody>{% for Item in data['Items'] %}
+<tr>
+    <td>{{Item['product_id']["S"]}}</td>
+    <td>{{Item['product_name']["S"]}}</td>
+	<td>{{Item['product_qty']["S"]}}</td>
+    <td>{{ Item['store_location']["S"] }}</td>
+
+</tr>{% endfor %}
+</tbody>
+</table>
+<br>
+<h2>Add/ Update Store Inventory</h2>
+<table>
+    <tr>
+    <th>Product Id</th>
+    <th>Product Name</th>
+    <th>Product Qty</th>
+	<th>Store Location</th>
+  </tr>
+    <form action="{{ url_for('items') }}" method="post">
+        <center>
+            <tr>
+                <td> <input type="text" name="product_id" /></td>
+                <td> <input type="text" name="product_name" /></td>
+				<td> <input type="text" name="product_qty" /></td>
+				<td> <input type="text" name="store_location" /></td>
+                <td> <input type="submit" value="add" name="add"></td>
+            </tr>
+        </center>
+            {{ form.csrf_token }}
+        </form>
+        <form action="{{ url_for('items') }}" method="post">
+        <center>
+            <tr>
+                <td> <input type="text" name="product_id" /></td>
+                <td> <input type="text" name="product_name" /></td>
+				<td> </td>
+				<td> </td>
+                <td> <input type="submit" value="delete" name="delete"></td>
+            </tr>
+        </center>
+            {{ form.csrf_token }}
+        </form>
+          <form action="{{ url_for('items') }}" method="post">
+        <center>
+            <tr>
+                <td> <input type="text" name="product_id" /></td>
+                <td> <input type="text" name="product_name" /></td>
+				<td> <input type="text" name="product_qty" /></td>
+				<td> <input type="text" name="store_location" /></td>
+                <td> <input type="submit" value="update" name="update"></td>
+            </tr>
+        </center>
+            {{ form.csrf_token }}
+        </form>
+</table>
+</body>
